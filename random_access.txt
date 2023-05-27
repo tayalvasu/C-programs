@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_FILENAME_LENGTH 50
+
+int main() {
+    FILE* file;
+    char filename[MAX_FILENAME_LENGTH];
+    int position, value;
+
+    printf("Enter the filename: ");
+    scanf("%s", filename);
+
+    // Open the file in binary mode for both reading and writing
+    file = fopen(filename, "rb+");
+    if (file == NULL) {
+        printf("Error opening the file!\n");
+        return 1;
+    }
+
+    printf("Enter the position to seek: ");
+    scanf("%d", &position);
+
+    // Seek to the desired position
+    if (fseek(file, position * sizeof(int), SEEK_SET) != 0) {
+        printf("Error seeking to the position!\n");
+        fclose(file);
+        return 1;
+    }
+
+    printf("Enter the value to write: ");
+    scanf("%d", &value);
+
+    // Write the value at the desired position
+    if (fwrite(&value, sizeof(int), 1, file) != 1) {
+        printf("Error writing to the file!\n");
+        fclose(file);
+        return 1;
+    }
+
+    // Seek back to the beginning of the file
+    if (fseek(file, 0, SEEK_SET) != 0) {
+        printf("Error seeking to the beginning of the file!\n");
+        fclose(file);
+        return 1;
+    }
+
+    // Read and print the contents of the file
+    printf("File contents:\n");
+    while (fread(&value, sizeof(int), 1, file) == 1) {
+        printf("%d ", value);
+    }
+    printf("\n");
+
+    fclose(file);
+
+    return 0;
+}

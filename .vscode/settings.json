@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "open-FILE.C": "cpp",
+        "stdio.h": "c",
+        "string.h": "c"
+    }
+}

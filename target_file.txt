@@ -1,0 +1,11 @@
+The #else preprocessor directive evaluates the expression or condition if condition of #if is false. It can be used with #if, #elif, #ifdef and #ifndef directives.
+Syntax:
+1.	#if expression  
+2.	//if code  
+3.	#else  
+4.	//else code  
+5.	#endif  
+Syntax with #elif:
+1.	#if expression  
+2.	//if code  
+3.	#elif expression  
